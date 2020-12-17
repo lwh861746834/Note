@@ -665,6 +665,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
      * @return The number of rows updated.
      * @throws IllegalArgumentException if the incoming URI pattern is invalid.
      */
+
     @Override
     public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
 

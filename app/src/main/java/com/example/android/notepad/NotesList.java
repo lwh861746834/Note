@@ -37,7 +37,11 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Displays a list of notes. Will display notes from the {@link Uri}
@@ -60,6 +64,7 @@ public class NotesList extends ListActivity {
     private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
             NotePad.Notes.COLUMN_NAME_TITLE, // 1
+            NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE
     };
 
     /** The index of the title column */
@@ -71,7 +76,7 @@ public class NotesList extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.searchview);
         // The user does not need to hold down the key to use menu shortcuts.
         setDefaultKeyMode(DEFAULT_KEYS_SHORTCUT);
 
@@ -117,11 +122,12 @@ public class NotesList extends ListActivity {
          */
 
         // The names of the cursor columns to display in the view, initialized to the title column
-        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE } ;
+
+        String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE,NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE} ;
 
         // The view IDs that will display the cursor columns, initialized to the TextView in
         // noteslist_item.xml
-        int[] viewIDs = { android.R.id.text1 };
+        int[] viewIDs = { android.R.id.text1,R.id.text2 };
 
         // Creates the backing adapter for the ListView.
         SimpleCursorAdapter adapter
@@ -135,8 +141,47 @@ public class NotesList extends ListActivity {
 
         // Sets the ListView's adapter to be the cursor adapter that was just created.
         setListAdapter(adapter);
+        SearchView(adapter);
     }
 
+
+    public void SearchView(final SimpleCursorAdapter adapter) {
+        SearchView searchView = findViewById(R.id.search);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // 单击搜索按钮时激发该方法
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            // 用户输入字符时激发该方法
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Cursor newCursor;
+
+                if (!s.equals("")) {
+                    String selection = NotePad.Notes.COLUMN_NAME_TITLE + " GLOB '*" + s + "*'";
+                    newCursor = getContentResolver().query(
+                            getIntent().getData(),
+                            PROJECTION,
+                            selection,
+                            null,
+                            NotePad.Notes.DEFAULT_SORT_ORDER
+                    );
+                } else {
+                    newCursor = getContentResolver().query(
+                            getIntent().getData(),
+                            PROJECTION,
+                            null,
+                            null,
+                            NotePad.Notes.DEFAULT_SORT_ORDER
+                    );
+                }
+                adapter.swapCursor(newCursor); // 视图将同步更新！
+                return true;
+            }
+        });
+    }
     /**
      * Called when the user clicks the device's Menu button the first time for
      * this Activity. Android passes in a Menu object that is populated with items.

@@ -28,12 +28,15 @@ public final class R {
     public static final int menu_save=0x7f020007;
     public static final int note=0x7f020008;
     public static final int ok=0x7f020009;
-    public static final int title=0x7f02000a;
+    public static final int search=0x7f02000a;
+    public static final int text2=0x7f02000b;
+    public static final int title=0x7f02000c;
   }
   public static final class layout {
     public static final int note_editor=0x7f030000;
     public static final int noteslist_item=0x7f030001;
-    public static final int title_editor=0x7f030002;
+    public static final int searchview=0x7f030002;
+    public static final int title_editor=0x7f030003;
   }
   public static final class menu {
     public static final int editor_options_menu=0x7f040000;

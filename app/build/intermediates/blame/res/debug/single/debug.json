@@ -72,6 +72,10 @@
         "source": "D:\\Android_Projects\\NotePad-master\\app\\src\\main\\res\\drawable-ldpi\\app_notes.png"
     },
     {
+        "merged": "D:\\Android_Projects\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\layout_searchview.xml.flat",
+        "source": "D:\\Android_Projects\\NotePad-master\\app\\src\\main\\res\\layout\\searchview.xml"
+    },
+    {
         "merged": "D:\\Android_Projects\\NotePad-master\\app\\build\\intermediates\\res\\merged\\debug\\menu_editor_options_menu.xml.flat",
         "source": "D:\\Android_Projects\\NotePad-master\\app\\src\\main\\res\\menu\\editor_options_menu.xml"
     },
