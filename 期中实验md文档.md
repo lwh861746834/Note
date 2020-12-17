@@ -94,7 +94,7 @@ values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,sf.format(new Date()));
 ```
 于是时间戳功能得以实现（成果如图）：  
 ![](https://img-blog.csdnimg.cn/20201217231326377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)  
-## 在笔记本中添加搜索框  
+## 第四步、在笔记本中添加搜索框  
 1.先添加一个搜索框视图：  
 ![](https://img-blog.csdnimg.cn/20201217233545545.png)  
 2.编辑搜索框格式：  
