@@ -6,10 +6,19 @@
           android:title="@string/menu_add"
           android:alphabeticShortcut='a'
           android:showAsAction="always" />
+    <item android:id="@+id/menu_deleteAll"
+        android:title="清空"
+        android:showAsAction="ifRoom|withText" />
     <!--  If there is currently data in the clipboard, this adds a PASTE menu item to the menu
           so that the user can paste in the data.. -->
     <item android:id="@+id/menu_paste"
           android:icon="@drawable/ic_menu_compose"
           android:title="@string/menu_paste"
           android:alphabeticShortcut='p' />
+
+
+    <item
+        android:id="@+id/write"
+        android:title="添加新标签"/>
+
 </menu>

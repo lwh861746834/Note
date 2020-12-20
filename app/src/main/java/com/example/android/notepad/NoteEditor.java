@@ -37,6 +37,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -179,7 +180,8 @@ public class NoteEditor extends Activity {
             if (mUri == null) {
 
                 // Writes the log identifier, a message, and the URI that failed.
-                Log.e(TAG, "Failed to insert new note into " + getIntent().getData());
+
+
 
                 // Closes the activity.
                 finish();
@@ -614,6 +616,7 @@ public class NoteEditor extends Activity {
         if (mCursor != null) {
             mCursor.close();
             mCursor = null;
+            Log.e(TAG, "Failed to insert new note into " + getIntent().getData());
             getContentResolver().delete(mUri, null, null);
             mText.setText("");
         }

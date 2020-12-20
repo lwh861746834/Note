@@ -26,6 +26,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,9 +37,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -144,7 +149,11 @@ public class NotesList extends ListActivity {
         SearchView(adapter);
     }
 
-
+    public final void deleteNoteAll() {
+            Log.e(TAG, "Failed to insert new note into " + getIntent().getData());
+            getContentResolver().delete(getIntent().getData(), null, null);
+            Toast.makeText(NotesList.this, "清空成功", Toast.LENGTH_SHORT).show();
+    }
     public void SearchView(final SimpleCursorAdapter adapter) {
         SearchView searchView = findViewById(R.id.search);
         searchView.setSubmitButtonEnabled(true);
@@ -182,6 +191,8 @@ public class NotesList extends ListActivity {
             }
         });
     }
+
+
     /**
      * Called when the user clicks the device's Menu button the first time for
      * this Activity. Android passes in a Menu object that is populated with items.
@@ -315,7 +326,15 @@ public class NotesList extends ListActivity {
            * In effect, this starts the NoteEditor Activity in NotePad.
            */
            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
+            Toast.makeText(NotesList.this, "新增成功", Toast.LENGTH_SHORT).show();
            return true;
+        case R.id.menu_deleteAll:
+            deleteNoteAll();
+            return true;
+        case R.id.write:
+            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
+            Toast.makeText(NotesList.this, "添加成功", Toast.LENGTH_SHORT).show();
+            return true;
         case R.id.menu_paste:
           /*
            * Launches a new Activity using an Intent. The intent filter for the Activity
@@ -323,11 +342,13 @@ public class NotesList extends ListActivity {
            * In effect, this starts the NoteEditor Activity in NotePad.
            */
           startActivity(new Intent(Intent.ACTION_PASTE, getIntent().getData()));
+          Toast.makeText(NotesList.this, "粘贴成功", Toast.LENGTH_SHORT).show();
           return true;
         default:
             return super.onOptionsItemSelected(item);
         }
     }
+
 
     /**
      * This method is called when the user context-clicks a note in the list. NotesList registers
@@ -469,7 +490,7 @@ public class NotesList extends ListActivity {
                           // passed in.
                 null      // No where clause is used, so no where arguments are needed.
             );
-  
+            Toast.makeText(NotesList.this, "删除成功", Toast.LENGTH_SHORT).show();
             // Returns to the caller and skips further processing.
             return true;
         default:

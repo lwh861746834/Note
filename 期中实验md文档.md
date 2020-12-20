@@ -190,6 +190,46 @@ SearchView(adapter);
 实现功能之后，输入内容它会自动显示如图所示：  
 ![](https://img-blog.csdnimg.cn/20201218010811607.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)  
 
+## 五、拓展功能一（清空功能）  
+Cursor是一个得到数据库对应行的存储集合，getContentResolver()是第三方链接到数据库数据流的接口方法，我在控制台打出数据尝试了一下，发现getContentResolver().delete()方法中第一个参数URI是一个类似于网页，或者说是分层目录的东西，我们删除的时候删除的是这个URI对应目录的文件。比如我在notes层删除的是notes。如下图所示，感受到的东西是不一样的：  
+![](https://img-blog.csdnimg.cn/20201220170535700.png)  
+清空功能即是把这个得到的URI的不同层的实现。  
+第一步、在list_options_menu添加视图代码：  
+
+```xml
+<item android:id="@+id/menu_deleteAll"
+        android:title="清空"
+        android:showAsAction="ifRoom|withText" />
+```
+第二步、利用ctrl+f找到menu_add的地方，添加如图所示代码(这一步的同时创建一个deleteNoteAll()方法），点击的时候就会触发deleteNoteAll()方法：  
+![](https://img-blog.csdnimg.cn/20201220171043887.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)     
+第三步、deleteNoteAll()方法代码：  
+
+```java
+public final void deleteNoteAll() {
+            Log.e(TAG, "Failed to insert new note into " + getIntent().getData());
+            getContentResolver().delete(getIntent().getData(), null, null);
+            Toast.makeText(NotesList.this, "清空成功", Toast.LENGTH_SHORT).show();
+    }
+```
+第四步、很简单的逻辑（写的时候看了好几个小时才有这样的认识），然后实验成果如下：  
+![](https://img-blog.csdnimg.cn/20201220171645935.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)  
+## 六、拓展功能二（侧面菜单栏添加功能+交互提示）
+一、菜单栏添加标签功能  
+1.1  添加菜单栏如图   
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20201220190732274.png)  
+1.2 添加java代码  
+
+```java
+case R.id.write:
+            startActivity(new Intent(Intent.ACTION_INSERT, getIntent().getData()));
+            return true;
+```
+二、友好的交互提醒  
+2.1 新增成功  
+![](https://img-blog.csdnimg.cn/20201220191053696.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)  
+2.2 删除成功  
+![](https://img-blog.csdnimg.cn/20201220191230918.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0ltcGVybWFuZW50,size_16,color_FFFFFF,t_70)   
 
 
 

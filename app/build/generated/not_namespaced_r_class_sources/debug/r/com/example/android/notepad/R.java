@@ -18,19 +18,24 @@ public final class R {
     public static final int live_folder_notes=0x7f010006;
   }
   public static final class id {
-    public static final int context_copy=0x7f020000;
-    public static final int context_delete=0x7f020001;
-    public static final int context_open=0x7f020002;
-    public static final int menu_add=0x7f020003;
-    public static final int menu_delete=0x7f020004;
-    public static final int menu_paste=0x7f020005;
-    public static final int menu_revert=0x7f020006;
-    public static final int menu_save=0x7f020007;
-    public static final int note=0x7f020008;
-    public static final int ok=0x7f020009;
-    public static final int search=0x7f02000a;
-    public static final int text2=0x7f02000b;
-    public static final int title=0x7f02000c;
+    public static final int cb_select=0x7f020000;
+    public static final int color=0x7f020001;
+    public static final int context_copy=0x7f020002;
+    public static final int context_delete=0x7f020003;
+    public static final int context_open=0x7f020004;
+    public static final int list123=0x7f020005;
+    public static final int menu_add=0x7f020006;
+    public static final int menu_delete=0x7f020007;
+    public static final int menu_deleteAll=0x7f020008;
+    public static final int menu_paste=0x7f020009;
+    public static final int menu_revert=0x7f02000a;
+    public static final int menu_save=0x7f02000b;
+    public static final int note=0x7f02000c;
+    public static final int ok=0x7f02000d;
+    public static final int search=0x7f02000e;
+    public static final int text2=0x7f02000f;
+    public static final int title=0x7f020010;
+    public static final int write=0x7f020011;
   }
   public static final class layout {
     public static final int note_editor=0x7f030000;
